@@ -1,26 +1,33 @@
 <template>
   <v-dialog eager @input="change" value="true" :max-width="width" :persistent="persistent" @keydown.esc="choose(false)">
-    <v-card tile>
-      <v-toolbar v-if="Boolean(title)" dark :color="color" dense flat>
-        <v-icon v-if="Boolean(icon)" left>{{ icon }}</v-icon>
-        <v-toolbar-title class="white--text" v-text="title"/>
-      </v-toolbar>
-      <v-card-text class="body-1 text-body-1 py-3" v-html="message"/>
-      <v-card-actions>
+    <v-card>
+      <v-card-title class="flex-column px-6 pt-6 pb-4">
+        <div v-if="icon" class="d-flex align-center justify-center" style="position: relative">
+          <v-avatar
+              style="opacity: 0.2"
+              :color="color"
+              :size="32"
+          ></v-avatar>
+          <v-icon style="position: absolute" :color="color" :size="24">{{ icon }}</v-icon>
+        </div>
+        <h5 v-if="title" class="text-h5 mt-3" v-text="title"></h5>
+      </v-card-title>
+      <v-card-text class="px-6 pb-4" v-html="message"></v-card-text>
+      <v-card-actions class="px-6 pb-7">
         <v-spacer/>
         <v-btn
-          v-if="Boolean(buttonFalseText)"
-          :color="buttonFalseColor"
-          :text="buttonFalseFlat"
-          @click="choose(false)"
+            v-if="buttonFalseText"
+            :color="buttonFalseColor"
+            :text="buttonFalseFlat"
+            @click="choose(false)"
         >
           {{ buttonFalseText }}
         </v-btn>
         <v-btn
-          v-if="Boolean(buttonTrueText)"
-          :color="buttonTrueColor"
-          :text="buttonTrueFlat"
-          @click="choose(true)"
+            v-if="buttonTrueText"
+            :color="buttonTrueColor"
+            :text="buttonTrueFlat"
+            @click="choose(true)"
         >
           {{ buttonTrueText }}
         </v-btn>
@@ -47,11 +54,11 @@ export default {
   props: {
     buttonTrueText: {
       type: String,
-      default: 'Yes'
+      default: 'Confirm'
     },
     buttonFalseText: {
       type: String,
-      default: 'No'
+      default: 'Cancel'
     },
     buttonTrueColor: {
       type: String,
@@ -59,7 +66,7 @@ export default {
     },
     buttonFalseColor: {
       type: String,
-      default: 'grey'
+      default: 'primary'
     },
     buttonFalseFlat: {
       type: Boolean,
@@ -89,7 +96,7 @@ export default {
     },
     width: {
       type: Number,
-      default: 450
+      default: 400
     }
   },
   data () {
@@ -104,18 +111,18 @@ export default {
     document.removeEventListener('keyup', this.onEnterPressed)
   },
   methods: {
-    onEnterPressed (e) {
+    onEnterPressed(e) {
       if (e.keyCode === 13) {
         e.stopPropagation()
         this.choose(true)
       }
     },
-    choose (value) {
+    choose(value) {
       this.$emit('result', value)
       this.value = value
       this.$destroy()
     },
-    change (res) {
+    change(res) {
       this.$destroy()
     }
   }
