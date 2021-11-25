@@ -42,38 +42,15 @@ export default ({ app }) => {
 }
 ```
 
-## vuetify 1
-For vuetify 1 please use [0.2.6 version](https://www.npmjs.com/package/vuetify-confirm/v/0.2.6)
-
-## Installation options
-
-```javascript
-import VuetifyConfirm from 'vuetify-confirm'
-Vue.use(VuetifyConfirm, {
-  vuetify,
-  buttonTrueText: 'Accept',
-  buttonFalseText: 'Discard',
-  buttonTrueColor: 'primary',
-  buttonFalseColor: 'grey',
-  buttonTrueFlat: false,
-  buttonFalseFlat: true,
-  color: 'warning',
-  icon: 'warning',
-  title: 'Warning',
-  width: 350,
-  property: '$confirm'
-})
-```
-
 property: '$confirm' will create property with this name in Vue prototype
 
 ## Params
  - message: String, required
  - options: Object
-    - buttonTrueText: String, default: 'Yes'
-    - buttonFalseText: String, default: 'No'
+    - buttonTrueText: String, default: 'Confirm'
+    - buttonFalseText: String, default: 'Cancel'
     - buttonTrueColor: String, default: 'primary'
-    - buttonFalseColor: String, default: 'grey'
+    - buttonFalseColor: String, default: 'primary'
     - buttonTrueFlat: Boolean, default: true
     - buttonFalseFlat: Boolean, default: true
     - color: String
