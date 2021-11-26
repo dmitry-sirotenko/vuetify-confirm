@@ -37,17 +37,17 @@
 </template>
 
 <script>
-import { VCard, VCardActions, VCardText, VDialog, VIcon, VToolbar, VToolbarTitle, VSpacer, VBtn } from 'vuetify/lib'
+import { VCard, VCardActions, VCardText, VCardTitle, VAvatar, VDialog, VIcon, VSpacer, VBtn } from 'vuetify/lib'
 
 export default {
   components: {
     VCard,
+    VCardTitle,
+    VAvatar,
     VCardActions,
     VCardText,
     VDialog,
     VIcon,
-    VToolbar,
-    VToolbarTitle,
     VSpacer,
     VBtn
   },

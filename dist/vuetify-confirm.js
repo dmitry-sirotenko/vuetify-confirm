@@ -46,12 +46,12 @@
 var script = {
   components: {
     VCard: lib.VCard,
+    VCardTitle: lib.VCardTitle,
+    VAvatar: lib.VAvatar,
     VCardActions: lib.VCardActions,
     VCardText: lib.VCardText,
     VDialog: lib.VDialog,
     VIcon: lib.VIcon,
-    VToolbar: lib.VToolbar,
-    VToolbarTitle: lib.VToolbarTitle,
     VSpacer: lib.VSpacer,
     VBtn: lib.VBtn
   },

@@ -1,4 +1,4 @@
-import { VBtn, VCard, VCardActions, VCardText, VDialog, VIcon, VSpacer, VToolbar, VToolbarTitle } from 'vuetify/lib';
+import { VAvatar, VBtn, VCard, VCardActions, VCardText, VCardTitle, VDialog, VIcon, VSpacer } from 'vuetify/lib';
 
 //
 //
@@ -42,12 +42,12 @@ import { VBtn, VCard, VCardActions, VCardText, VDialog, VIcon, VSpacer, VToolbar
 var script = {
   components: {
     VCard: VCard,
+    VCardTitle: VCardTitle,
+    VAvatar: VAvatar,
     VCardActions: VCardActions,
     VCardText: VCardText,
     VDialog: VDialog,
     VIcon: VIcon,
-    VToolbar: VToolbar,
-    VToolbarTitle: VToolbarTitle,
     VSpacer: VSpacer,
     VBtn: VBtn
   },
