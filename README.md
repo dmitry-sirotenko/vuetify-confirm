@@ -2,15 +2,6 @@
 
 This module extends vuetify confirm dialog.
 
-## Setup
-
-Install the package from npm
-
-```npm
-npm install vuetify-confirm
-```
-
-
 
 ## vuetify 2
 
