@@ -1,7 +1,45 @@
 import { VBtn, VCard, VCardActions, VCardText, VDialog, VIcon, VSpacer, VToolbar, VToolbarTitle } from 'vuetify/lib';
-import { createBlock, createCommentVNode, createElementBlock, createTextVNode, createVNode, openBlock, resolveComponent, toDisplayString, withCtx, withKeys } from 'vue';
 
-var Confirm = {
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+var script = {
   components: {
     VCard: VCard,
     VCardActions: VCardActions,
@@ -90,82 +128,161 @@ var Confirm = {
   }
 };
 
-var _hoisted_1 = {
-  key: 0,
-  class: "d-flex align-center justify-center",
-  style: { "position": "relative" }
-};
-var _hoisted_2 = ["textContent"];
-
-function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_v_avatar = resolveComponent("v-avatar");
-  var _component_v_icon = resolveComponent("v-icon");
-  var _component_v_card_title = resolveComponent("v-card-title");
-  var _component_v_card_text = resolveComponent("v-card-text");
-  var _component_v_spacer = resolveComponent("v-spacer");
-  var _component_v_btn = resolveComponent("v-btn");
-  var _component_v_card_actions = resolveComponent("v-card-actions");
-  var _component_v_card = resolveComponent("v-card");
-  var _component_v_dialog = resolveComponent("v-dialog");
-
-  return openBlock(), createBlock(_component_v_dialog, {
-    eager: "",
-    onInput: $options.change,
-    value: "true",
-    "max-width": $props.width,
-    persistent: $props.persistent,
-    onKeydown: _cache[2] || (_cache[2] = withKeys(function ($event) { return $options.choose(false); }, ["esc"]))
-  }, {
-    default: withCtx(function () { return [createVNode(_component_v_card, null, {
-      default: withCtx(function () { return [createVNode(_component_v_card_title, { class: "flex-column px-6 pt-6 pb-4" }, {
-        default: withCtx(function () { return [$props.icon ? (openBlock(), createElementBlock("div", _hoisted_1, [createVNode(_component_v_avatar, {
-          style: { "opacity": "0.2" },
-          color: $props.color,
-          size: 32
-        }, null, 8 /* PROPS */, ["color"]), createVNode(_component_v_icon, {
-          style: { "position": "absolute" },
-          color: $props.color,
-          size: 24
-        }, {
-          default: withCtx(function () { return [createTextVNode(toDisplayString($props.icon), 1 /* TEXT */)]; }),
-          _: 1 /* STABLE */
-        }, 8 /* PROPS */, ["color"])])) : createCommentVNode("v-if", true), $props.title ? (openBlock(), createElementBlock("h5", {
-          key: 1,
-          class: "text-h5 mt-3",
-          textContent: toDisplayString($props.title)
-        }, null, 8 /* PROPS */, _hoisted_2)) : createCommentVNode("v-if", true)]; }),
-        _: 1 /* STABLE */
-      }), createVNode(_component_v_card_text, {
-        class: "px-6 pb-4",
-        innerHTML: $props.message
-      }, null, 8 /* PROPS */, ["innerHTML"]), createVNode(_component_v_card_actions, { class: "px-6 pb-7" }, {
-        default: withCtx(function () { return [createVNode(_component_v_spacer), $props.buttonFalseText ? (openBlock(), createBlock(_component_v_btn, {
-          key: 0,
-          color: $props.buttonFalseColor,
-          text: $props.buttonFalseFlat,
-          onClick: _cache[0] || (_cache[0] = function ($event) { return $options.choose(false); })
-        }, {
-          default: withCtx(function () { return [createTextVNode(toDisplayString($props.buttonFalseText), 1 /* TEXT */)]; }),
-          _: 1 /* STABLE */
-        }, 8 /* PROPS */, ["color", "text"])) : createCommentVNode("v-if", true), $props.buttonTrueText ? (openBlock(), createBlock(_component_v_btn, {
-          key: 1,
-          color: $props.buttonTrueColor,
-          text: $props.buttonTrueFlat,
-          onClick: _cache[1] || (_cache[1] = function ($event) { return $options.choose(true); })
-        }, {
-          default: withCtx(function () { return [createTextVNode(toDisplayString($props.buttonTrueText), 1 /* TEXT */)]; }),
-          _: 1 /* STABLE */
-        }, 8 /* PROPS */, ["color", "text"])) : createCommentVNode("v-if", true)]; }),
-        _: 1 /* STABLE */
-      })]; }),
-      _: 1 /* STABLE */
-    })]; }),
-    _: 1 /* STABLE */
-  }, 8 /* PROPS */, ["onInput", "max-width", "persistent"]);
+function normalizeComponent(template, style, script, scopeId, isFunctionalTemplate, moduleIdentifier /* server only */, shadowMode, createInjector, createInjectorSSR, createInjectorShadow) {
+    if (typeof shadowMode !== 'boolean') {
+        createInjectorSSR = createInjector;
+        createInjector = shadowMode;
+        shadowMode = false;
+    }
+    // Vue.extend constructor export interop.
+    const options = typeof script === 'function' ? script.options : script;
+    // render functions
+    if (template && template.render) {
+        options.render = template.render;
+        options.staticRenderFns = template.staticRenderFns;
+        options._compiled = true;
+        // functional template
+        if (isFunctionalTemplate) {
+            options.functional = true;
+        }
+    }
+    // scopedId
+    if (scopeId) {
+        options._scopeId = scopeId;
+    }
+    let hook;
+    if (moduleIdentifier) {
+        // server build
+        hook = function (context) {
+            // 2.3 injection
+            context =
+                context || // cached call
+                    (this.$vnode && this.$vnode.ssrContext) || // stateful
+                    (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext); // functional
+            // 2.2 with runInNewContext: true
+            if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                context = __VUE_SSR_CONTEXT__;
+            }
+            // inject component styles
+            if (style) {
+                style.call(this, createInjectorSSR(context));
+            }
+            // register component module identifier for async chunk inference
+            if (context && context._registeredComponents) {
+                context._registeredComponents.add(moduleIdentifier);
+            }
+        };
+        // used by ssr in case component is cached and beforeCreate
+        // never gets called
+        options._ssrRegister = hook;
+    }
+    else if (style) {
+        hook = shadowMode
+            ? function (context) {
+                style.call(this, createInjectorShadow(context, this.$root.$options.shadowRoot));
+            }
+            : function (context) {
+                style.call(this, createInjector(context));
+            };
+    }
+    if (hook) {
+        if (options.functional) {
+            // register for functional component in vue file
+            const originalRender = options.render;
+            options.render = function renderWithStyleInjection(h, context) {
+                hook.call(context);
+                return originalRender(h, context);
+            };
+        }
+        else {
+            // inject component registration as beforeCreate hook
+            const existing = options.beforeCreate;
+            options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+        }
+    }
+    return script;
 }
 
-Confirm.render = render;
-Confirm.__file = "src/Confirm.vue";
+/* script */
+var __vue_script__ = script;
+
+/* template */
+var __vue_render__ = function () {
+  var _vm = this;
+  var _h = _vm.$createElement;
+  var _c = _vm._self._c || _h;
+  return _c("v-dialog", {
+    attrs: {
+      eager: "",
+      value: "true",
+      "max-width": _vm.width,
+      persistent: _vm.persistent
+    },
+    on: {
+      input: _vm.change,
+      keydown: function ($event) {
+        if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])) {
+          return null;
+        }
+        return _vm.choose(false);
+      }
+    }
+  }, [_c("v-card", [_c("v-card-title", { staticClass: "flex-column px-6 pt-6 pb-4" }, [_vm.icon ? _c("div", {
+    staticClass: "d-flex align-center justify-center",
+    staticStyle: { position: "relative" }
+  }, [_c("v-avatar", {
+    staticStyle: { opacity: "0.2" },
+    attrs: { color: _vm.color, size: 32 }
+  }), _vm._v(" "), _c("v-icon", {
+    staticStyle: { position: "absolute" },
+    attrs: { color: _vm.color, size: 24 }
+  }, [_vm._v(_vm._s(_vm.icon))])], 1) : _vm._e(), _vm._v(" "), _vm.title ? _c("h5", {
+    staticClass: "text-h5 mt-3",
+    domProps: { textContent: _vm._s(_vm.title) }
+  }) : _vm._e()]), _vm._v(" "), _c("v-card-text", {
+    staticClass: "px-6 pb-4",
+    domProps: { innerHTML: _vm._s(_vm.message) }
+  }), _vm._v(" "), _c("v-card-actions", { staticClass: "px-6 pb-7" }, [_c("v-spacer"), _vm._v(" "), _vm.buttonFalseText ? _c("v-btn", {
+    attrs: {
+      color: _vm.buttonFalseColor,
+      text: _vm.buttonFalseFlat
+    },
+    on: {
+      click: function ($event) {
+        return _vm.choose(false);
+      }
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.buttonFalseText) + "\n      ")]) : _vm._e(), _vm._v(" "), _vm.buttonTrueText ? _c("v-btn", {
+    attrs: {
+      color: _vm.buttonTrueColor,
+      text: _vm.buttonTrueFlat
+    },
+    on: {
+      click: function ($event) {
+        return _vm.choose(true);
+      }
+    }
+  }, [_vm._v("\n        " + _vm._s(_vm.buttonTrueText) + "\n      ")]) : _vm._e()], 1)], 1)], 1);
+};
+var __vue_staticRenderFns__ = [];
+__vue_render__._withStripped = true;
+
+/* style */
+var __vue_inject_styles__ = undefined;
+/* scoped */
+var __vue_scope_id__ = undefined;
+/* module identifier */
+var __vue_module_identifier__ = undefined;
+/* functional template */
+var __vue_is_functional_template__ = false;
+/* component normalizer */
+/* style inject */
+
+/* style inject SSR */
+
+/* style inject shadow dom */
+
+var __vue_component__ = /*#__PURE__*/normalizeComponent({ render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);
 
 function Install(Vue, options) {
   if ( options === void 0 ) options = {};
@@ -177,7 +294,7 @@ function Install(Vue, options) {
   if (!vuetify) {
     console.warn('Module vuetify-confirm needs vuetify instance. Use Vue.use(VuetifyConfirm, { vuetify })');
   }
-  var Ctor = Vue.extend(Object.assign({ vuetify: vuetify }, Confirm));
+  var Ctor = Vue.extend(Object.assign({ vuetify: vuetify }, __vue_component__));
   function createDialogCmp(options) {
     var container = document.querySelector('[data-app=true]') || document.body;
     return new Promise(function (resolve) {
