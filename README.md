@@ -2,13 +2,6 @@
 
 This module extends vuetify confirm dialog.
 
-[![NPM Version][npm-image]][npm-url]
-
-## Demo page
-[See the demo](https://q5w2v.csb.app/)
-
-[Open the demo in Codesandbox](https://codesandbox.io/s/vuetify-2-confirm-example-q5w2v)
-
 ## Setup
 
 Install the package from npm
