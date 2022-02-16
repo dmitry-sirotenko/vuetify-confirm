@@ -1,7 +1,7 @@
 <template>
   <v-dialog eager @input="change" value="true" :max-width="width" :persistent="persistent" @keydown.esc="choose(false)">
     <v-card>
-      <v-card-title v-if="titleExists" class="flex-column px-6 pt-6">
+      <v-card-title v-if="titleExists" class="flex-column px-6 pt-6 pb-4">
         <div v-if="icon" class="d-flex align-center justify-center" style="position: relative">
           <v-avatar
               style="opacity: 0.2"

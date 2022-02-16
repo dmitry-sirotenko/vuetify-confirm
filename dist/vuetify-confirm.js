@@ -241,7 +241,7 @@ var __vue_render__ = function () {
         return _vm.choose(false);
       }
     }
-  }, [_c("v-card", [_vm.titleExists ? _c("v-card-title", { staticClass: "flex-column px-6 pt-6" }, [_vm.icon ? _c("div", {
+  }, [_c("v-card", [_vm.titleExists ? _c("v-card-title", { staticClass: "flex-column px-6 pt-6 pb-4" }, [_vm.icon ? _c("div", {
     staticClass: "d-flex align-center justify-center",
     staticStyle: { position: "relative" }
   }, [_c("v-avatar", {
