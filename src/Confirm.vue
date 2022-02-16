@@ -1,7 +1,7 @@
 <template>
   <v-dialog eager @input="change" value="true" :max-width="width" :persistent="persistent" @keydown.esc="choose(false)">
     <v-card>
-      <v-card-title class="flex-column px-6 pt-6 pb-4">
+      <v-card-title v-if="titleExists" class="flex-column px-6 pt-6">
         <div v-if="icon" class="d-flex align-center justify-center" style="position: relative">
           <v-avatar
               style="opacity: 0.2"
@@ -12,7 +12,7 @@
         </div>
         <h5 v-if="title" class="text-h5 mt-3" v-text="title"></h5>
       </v-card-title>
-      <v-card-text class="px-6 pb-4" v-html="message"></v-card-text>
+      <v-card-text class="px-6 pb-4" :class="textClasses" v-html="message"></v-card-text>
       <v-card-actions class="px-6 pb-7">
         <v-spacer/>
         <v-btn
@@ -102,6 +102,16 @@ export default {
   data () {
     return {
       value: false
+    }
+  },
+  computed: {
+    titleExists() {
+      return !!(this.icon || this.title);
+    },
+    textClasses() {
+      return {
+        'pt-6': !this.titleExists,
+      };
     }
   },
   mounted () {

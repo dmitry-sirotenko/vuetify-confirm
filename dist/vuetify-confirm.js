@@ -108,6 +108,16 @@ var script = {
       value: false
     };
   },
+  computed: {
+    titleExists: function titleExists() {
+      return !!(this.icon || this.title);
+    },
+    textClasses: function textClasses() {
+      return {
+        'pt-6': !this.titleExists
+      };
+    }
+  },
   mounted: function mounted() {
     document.addEventListener('keyup', this.onEnterPressed);
   },
@@ -231,7 +241,7 @@ var __vue_render__ = function () {
         return _vm.choose(false);
       }
     }
-  }, [_c("v-card", [_c("v-card-title", { staticClass: "flex-column px-6 pt-6 pb-4" }, [_vm.icon ? _c("div", {
+  }, [_c("v-card", [_vm.titleExists ? _c("v-card-title", { staticClass: "flex-column px-6 pt-6" }, [_vm.icon ? _c("div", {
     staticClass: "d-flex align-center justify-center",
     staticStyle: { position: "relative" }
   }, [_c("v-avatar", {
@@ -243,8 +253,9 @@ var __vue_render__ = function () {
   }, [_vm._v(_vm._s(_vm.icon))])], 1) : _vm._e(), _vm._v(" "), _vm.title ? _c("h5", {
     staticClass: "text-h5 mt-3",
     domProps: { textContent: _vm._s(_vm.title) }
-  }) : _vm._e()]), _vm._v(" "), _c("v-card-text", {
+  }) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("v-card-text", {
     staticClass: "px-6 pb-4",
+    class: _vm.textClasses,
     domProps: { innerHTML: _vm._s(_vm.message) }
   }), _vm._v(" "), _c("v-card-actions", { staticClass: "px-6 pb-7" }, [_c("v-spacer"), _vm._v(" "), _vm.buttonFalseText ? _c("v-btn", {
     attrs: {
