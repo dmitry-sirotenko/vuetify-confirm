@@ -1,20 +1,33 @@
 <template>
-  <v-dialog eager @input="change" value="true" :max-width="width" :persistent="persistent" @keydown.esc="choose(false)">
+  <v-dialog
+      value="true"
+      :max-width="width"
+      :persistent="persistent"
+      eager
+      @input="change"
+      @keydown.esc="choose(false)"
+  >
     <v-card>
-      <v-card-title v-if="titleExists" class="flex-column px-6 pt-6 pb-4">
-        <div v-if="icon" class="d-flex align-center justify-center" style="position: relative">
-          <v-avatar
-              style="opacity: 0.2"
-              :color="color"
-              :size="32"
-          ></v-avatar>
-          <v-icon style="position: absolute" :color="color" :size="24">{{ icon }}</v-icon>
-        </div>
-        <h5 v-if="title" class="text-h5 mt-3" v-text="title"></h5>
+      <v-card-title class="flex-column">
+        <v-avatar v-if="icon" class="mb-4" :color="avatarColor" :size="32">
+          <v-icon :color="color" :size="24" v-text="icon" />
+        </v-avatar>
+
+        <span v-if="title" class="text-center" v-html="title" />
       </v-card-title>
-      <v-card-text class="px-6 pb-4" :class="textClasses" v-html="message"></v-card-text>
-      <v-card-actions class="px-6 pb-7">
-        <v-spacer/>
+      <v-card-text>
+        <template v-if="message">
+          <div v-html="message"></div>
+        </template>
+
+        <template v-if="$slots.content">
+          <div class="mt-4">
+            <slot name="content" />
+          </div>
+        </template>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer />
         <v-btn
             v-if="buttonFalseText"
             :color="buttonFalseColor"
@@ -37,7 +50,17 @@
 </template>
 
 <script>
-import { VCard, VCardActions, VCardText, VCardTitle, VAvatar, VDialog, VIcon, VSpacer, VBtn } from 'vuetify/lib'
+import {
+  VCard,
+  VCardActions,
+  VCardText,
+  VCardTitle,
+  VAvatar,
+  VDialog,
+  VIcon,
+  VSpacer,
+  VBtn,
+} from 'vuetify/lib';
 
 export default {
   components: {
@@ -49,92 +72,86 @@ export default {
     VDialog,
     VIcon,
     VSpacer,
-    VBtn
+    VBtn,
   },
   props: {
     buttonTrueText: {
       type: String,
-      default: 'Confirm'
+      default: 'Confirm',
     },
     buttonFalseText: {
       type: String,
-      default: 'Cancel'
+      default: 'Cancel',
     },
     buttonTrueColor: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     buttonFalseColor: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     buttonFalseFlat: {
       type: Boolean,
-      default: true
+      default: true,
     },
     buttonTrueFlat: {
       type: Boolean,
-      default: true
+      default: true,
     },
     color: {
       type: String,
-      default: 'warning'
+      default: 'warning',
+    },
+    avatarColor: {
+      type: String,
+      default: 'orange lighten-5',
     },
     icon: {
       type: String,
-      default () {
-        return this.$vuetify.icons.values.warning
-      }
+      default() {
+        return this.$vuetify.icons.values.warning;
+      },
     },
     message: {
       type: String,
-      required: true
+      required: true,
     },
     persistent: Boolean,
     title: {
-      type: String
+      type: String,
     },
     width: {
       type: Number,
-      default: 400
-    }
-  },
-  data () {
-    return {
-      value: false
-    }
-  },
-  computed: {
-    titleExists() {
-      return !!(this.icon || this.title);
+      default: 400,
     },
-    textClasses() {
-      return {
-        'pt-6': !this.titleExists,
-      };
-    }
   },
-  mounted () {
-    document.addEventListener('keyup', this.onEnterPressed)
+  data() {
+    return {
+      value: false,
+    };
   },
-  destroyed () {
-    document.removeEventListener('keyup', this.onEnterPressed)
+  mounted() {
+    document.addEventListener('keyup', this.onEnterPressed);
+  },
+  destroyed() {
+    document.removeEventListener('keyup', this.onEnterPressed);
   },
   methods: {
     onEnterPressed(e) {
       if (e.keyCode === 13) {
-        e.stopPropagation()
-        this.choose(true)
+        e.stopPropagation();
+        this.choose(true);
       }
     },
     choose(value) {
-      this.$emit('result', value)
-      this.value = value
-      this.$destroy()
+      this.$emit('result', value);
+      this.value = value;
+      this.$destroy();
     },
     change(res) {
-      this.$destroy()
-    }
-  }
-}
+      this.$destroy();
+    },
+  },
+};
 </script>

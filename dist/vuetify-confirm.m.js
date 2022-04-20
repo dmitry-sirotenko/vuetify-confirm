@@ -38,6 +38,19 @@ import { VAvatar, VBtn, VCard, VCardActions, VCardText, VCardTitle, VDialog, VIc
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var script = {
   components: {
@@ -80,6 +93,10 @@ var script = {
       type: String,
       default: 'warning'
     },
+    avatarColor: {
+      type: String,
+      default: 'orange lighten-5'
+    },
     icon: {
       type: String,
       default: function default$1() {
@@ -103,16 +120,6 @@ var script = {
     return {
       value: false
     };
-  },
-  computed: {
-    titleExists: function titleExists() {
-      return !!(this.icon || this.title);
-    },
-    textClasses: function textClasses() {
-      return {
-        'pt-6': !this.titleExists
-      };
-    }
   },
   mounted: function mounted() {
     document.addEventListener('keyup', this.onEnterPressed);
@@ -223,10 +230,10 @@ var __vue_render__ = function () {
   var _c = _vm._self._c || _h;
   return _c("v-dialog", {
     attrs: {
-      eager: "",
       value: "true",
       "max-width": _vm.width,
-      persistent: _vm.persistent
+      persistent: _vm.persistent,
+      eager: ""
     },
     on: {
       input: _vm.change,
@@ -237,23 +244,16 @@ var __vue_render__ = function () {
         return _vm.choose(false);
       }
     }
-  }, [_c("v-card", [_vm.titleExists ? _c("v-card-title", { staticClass: "flex-column px-6 pt-6 pb-4" }, [_vm.icon ? _c("div", {
-    staticClass: "d-flex align-center justify-center",
-    staticStyle: { position: "relative" }
-  }, [_c("v-avatar", {
-    staticStyle: { opacity: "0.2" },
-    attrs: { color: _vm.color, size: 32 }
-  }), _vm._v(" "), _c("v-icon", {
-    staticStyle: { position: "absolute" },
-    attrs: { color: _vm.color, size: 24 }
-  }, [_vm._v(_vm._s(_vm.icon))])], 1) : _vm._e(), _vm._v(" "), _vm.title ? _c("h5", {
-    staticClass: "text-h5 mt-3",
-    domProps: { textContent: _vm._s(_vm.title) }
-  }) : _vm._e()]) : _vm._e(), _vm._v(" "), _c("v-card-text", {
-    staticClass: "px-6 pb-4",
-    class: _vm.textClasses,
-    domProps: { innerHTML: _vm._s(_vm.message) }
-  }), _vm._v(" "), _c("v-card-actions", { staticClass: "px-6 pb-7" }, [_c("v-spacer"), _vm._v(" "), _vm.buttonFalseText ? _c("v-btn", {
+  }, [_c("v-card", [_c("v-card-title", { staticClass: "flex-column" }, [_vm.icon ? _c("v-avatar", {
+    staticClass: "mb-4",
+    attrs: { color: _vm.avatarColor, size: 32 }
+  }, [_c("v-icon", {
+    attrs: { color: _vm.color, size: 24 },
+    domProps: { textContent: _vm._s(_vm.icon) }
+  })], 1) : _vm._e(), _vm._v(" "), _vm.title ? _c("span", {
+    staticClass: "text-center",
+    domProps: { innerHTML: _vm._s(_vm.title) }
+  }) : _vm._e()], 1), _vm._v(" "), _c("v-card-text", [_vm.message ? [_c("div", { domProps: { innerHTML: _vm._s(_vm.message) } })] : _vm._e(), _vm._v(" "), _vm.$slots.content ? [_c("div", { staticClass: "mt-4" }, [_vm._t("content")], 2)] : _vm._e()], 2), _vm._v(" "), _c("v-card-actions", [_c("v-spacer"), _vm._v(" "), _vm.buttonFalseText ? _c("v-btn", {
     attrs: {
       color: _vm.buttonFalseColor,
       text: _vm.buttonFalseFlat
@@ -306,7 +306,7 @@ function Install(Vue, options) {
     console.warn('Module vuetify-confirm needs vuetify instance. Use Vue.use(VuetifyConfirm, { vuetify })');
   }
   var Ctor = Vue.extend(Object.assign({ vuetify: vuetify }, __vue_component__));
-  function createDialogCmp(options) {
+  function createDialogCmp(options, slots) {
     var container = document.querySelector('[data-app=true]') || document.body;
     return new Promise(function (resolve) {
       var cmp = new Ctor(Object.assign({}, {
@@ -316,15 +316,19 @@ function Install(Vue, options) {
           resolve(cmp.value);
         }
       }));
+
+      Object.assign(cmp.$slots, slots);
+
       container.appendChild(cmp.$mount().$el);
     });
   }
 
-  function show(message, options) {
+  function show(message, options, slots) {
     if ( options === void 0 ) options = {};
+    if ( slots === void 0 ) slots = {};
 
     options.message = message;
-    return createDialogCmp(options);
+    return createDialogCmp(options, slots);
   }
 
   Vue.prototype[property] = show;

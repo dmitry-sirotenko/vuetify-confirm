@@ -1,4 +1,4 @@
-import Vue, { PluginFunction } from 'vue'
+import Vue, { PluginFunction, VNode } from 'vue'
 
 export interface VuetifyConfirmUseOptions extends VuetifyConfirmObject {
   property?: string
@@ -17,12 +17,13 @@ export interface VuetifyConfirmObject {
   buttonTrueColor?: string
   buttonFalseColor?: string
   color?: string
+  avatarColor?: string
   icon?: string
   title?: string
   width? : number
 }
 declare module 'vue/types/vue' {
   interface Vue {
-    $confirm (message: string, options?: VuetifyConfirmObject): Promise<boolean | undefined>
+    $confirm (message: string, options?: VuetifyConfirmObject, slots?: { [key: string]: VNode[] | VNode | undefined } ): Promise<boolean | undefined>
   }
 }
