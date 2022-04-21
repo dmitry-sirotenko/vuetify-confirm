@@ -308,29 +308,29 @@ function Install(Vue, options) {
     console.warn('Module vuetify-confirm needs vuetify instance. Use Vue.use(VuetifyConfirm, { vuetify })');
   }
   var Ctor = Vue.extend(Object.assign({ vuetify: vuetify }, __vue_component__));
-  function createDialogCmp(options, slots) {
+  function createDialogCmp(options, content) {
     var container = document.querySelector('[data-app=true]') || document.body;
     return new Promise(function (resolve) {
       var cmp = new Ctor(Object.assign({}, {
         propsData: Object.assign({}, Vue.prototype[property].options, options),
         destroyed: function () {
+          if (content) { content.$destroy(); }
           container.removeChild(cmp.$el);
           resolve(cmp.value);
         }
       }));
 
-      Object.assign(cmp.$slots, slots);
+      cmp.$slots.content = content && content.$mount()._vnode;
 
       container.appendChild(cmp.$mount().$el);
     });
   }
 
-  function show(message, options, slots) {
+  function show(message, options, content) {
     if ( options === void 0 ) options = {};
-    if ( slots === void 0 ) slots = {};
 
     options.message = message;
-    return createDialogCmp(options, slots);
+    return createDialogCmp(options, content);
   }
 
   Vue.prototype[property] = show;

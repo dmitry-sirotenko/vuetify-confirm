@@ -11,7 +11,7 @@ function Install(Vue, options = {}) {
     );
   }
   const Ctor = Vue.extend(Object.assign({ vuetify }, Confirm));
-  function createDialogCmp(options, slots) {
+  function createDialogCmp(options, content) {
     const container = document.querySelector('[data-app=true]') || document.body;
     return new Promise((resolve) => {
       const cmp = new Ctor(
@@ -20,6 +20,7 @@ function Install(Vue, options = {}) {
               {
                 propsData: Object.assign({}, Vue.prototype[property].options, options),
                 destroyed: () => {
+                  if (content) content.$destroy();
                   container.removeChild(cmp.$el);
                   resolve(cmp.value);
                 },
@@ -27,15 +28,15 @@ function Install(Vue, options = {}) {
           )
       );
 
-      Object.assign(cmp.$slots, slots);
+      cmp.$slots.content = content && content.$mount()._vnode;
 
       container.appendChild(cmp.$mount().$el);
     });
   }
 
-  function show(message, options = {}, slots = {}) {
+  function show(message, options = {}, content) {
     options.message = message;
-    return createDialogCmp(options, slots);
+    return createDialogCmp(options, content);
   }
 
   Vue.prototype[property] = show;
